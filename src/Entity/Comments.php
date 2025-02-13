@@ -15,7 +15,7 @@ class Comments
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?users $used_id = null;
+    private ?user $user_id = null;
 
     #[ORM\Column(length: 1000)]
     private ?string $content = null;
@@ -28,14 +28,14 @@ class Comments
         return $this->id;
     }
 
-    public function getUsedId(): ?users
+    public function getUserId(): ?user
     {
-        return $this->used_id;
+        return $this->user_id;
     }
 
-    public function setUsedId(?users $used_id): static
+    public function setUsedId(?user $user_id): static
     {
-        $this->used_id = $used_id;
+        $this->user_id = $user_id;
 
         return $this;
     }
