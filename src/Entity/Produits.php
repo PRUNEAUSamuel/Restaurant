@@ -27,12 +27,13 @@ class Produits
     /**
      * @var Collection<int, Menus>
      */
-    #[ORM\ManyToMany(targetEntity: Menus::class, mappedBy: 'produit_id')]
-    private Collection $menuses;
+    #[ORM\ManyToMany(targetEntity: Menus::class, inversedBy: 'produits')]
+    #[ORM\JoinTable(name: "produit_menu")]
+    private Collection $menus;
 
     public function __construct()
     {
-        $this->menuses = new ArrayCollection();
+        $this->menus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,16 +80,16 @@ class Produits
     /**
      * @return Collection<int, Menus>
      */
-    public function getMenuses(): Collection
+    public function getMenus(): Collection
     {
-        return $this->menuses;
+        return $this->menus;
     }
 
     public function addMenus(Menus $menus): static
     {
-        if (!$this->menuses->contains($menus)) {
-            $this->menuses->add($menus);
-            $menus->addProduitId($this);
+        if (!$this->menus->contains($menus)) {
+            $this->menus->add($menus);
+            $menus->addProduits($this);
         }
 
         return $this;
@@ -96,8 +97,8 @@ class Produits
 
     public function removeMenus(Menus $menus): static
     {
-        if ($this->menuses->removeElement($menus)) {
-            $menus->removeProduitId($this);
+        if ($this->menus->removeElement($menus)) {
+            $menus->removeProduits($this);
         }
 
         return $this;

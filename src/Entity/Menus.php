@@ -24,12 +24,12 @@ class Menus
     /**
      * @var Collection<int, produits>
      */
-    #[ORM\ManyToMany(targetEntity: produits::class, inversedBy: 'menuses')]
-    private Collection $produit_id;
+    #[ORM\ManyToMany(targetEntity: Produits::class, mappedBy: 'menus')]
+    private Collection $produits;
 
     public function __construct()
     {
-        $this->produit_id = new ArrayCollection();
+        $this->produits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -49,38 +49,23 @@ class Menus
         return $this;
     }
 
-    public function getRelation(): ?string
+    public function getProduits(): Collection
     {
-        return $this->relation;
+        return $this->produits;
     }
 
-    public function setRelation(string $relation): static
+    public function addProduits(Produits $produits): static
     {
-        $this->relation = $relation;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, produits>
-     */
-    public function getProduitId(): Collection
-    {
-        return $this->produit_id;
-    }
-
-    public function addProduitId(produits $produitId): static
-    {
-        if (!$this->produit_id->contains($produitId)) {
-            $this->produit_id->add($produitId);
+        if (!$this->produits->contains($produits)) {
+            $this->produits->add($produits);
         }
 
         return $this;
     }
 
-    public function removeProduitId(produits $produitId): static
+    public function removeProduits(Produits $produits): static
     {
-        $this->produit_id->removeElement($produitId);
+        $this->produits->removeElement($produits);
 
         return $this;
     }
