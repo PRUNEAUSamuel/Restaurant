@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\EqualTo;
-use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -72,7 +71,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-
+            /*
             ->add('confirmPassword', PasswordType::class, [
                 'label' => 'Confirmer le mot de passe :',
                 'label_attr' => [
@@ -93,6 +92,7 @@ class RegistrationFormType extends AbstractType
                     ])
                 ]
             ]);
+            */
         ;
     }
 

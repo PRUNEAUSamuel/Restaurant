@@ -18,9 +18,6 @@ class Menus
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $relation = null;
-
     /**
      * @var Collection<int, produits>
      */
