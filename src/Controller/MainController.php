@@ -13,6 +13,12 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class MainController extends AbstractController
 {
+    #[Route('/', name: 'home')]
+    public function home()
+    {
+        return $this->render('main/index.html.twig');
+    }
+
     #[Route('/main', name: 'app_main')]
     public function index(): Response
     {

@@ -14,7 +14,15 @@ class SecurityController extends AbstractController
     {
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        return $this->render('security/login.html.twig');
+        if ($error) {
+            $errorMessage = "Le nom d'utilisateur ou le mot de passe est incorrect.";
+        } else {
+            $errorMessage = null;
+        }
+
+        return $this->render('security/login.html.twig', [
+            'error' => $errorMessage,
+        ]);
     }
 
     #[Route(path: '/logout', name: 'app_logout')]

@@ -4,16 +4,16 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Validator\Constraints\Length;
 
-class RegistrationFormType extends AbstractType
+class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -24,14 +24,8 @@ class RegistrationFormType extends AbstractType
                     'class' => 'block mb-2 text-sm font-medium',
                 ],
                 'attr' => [
-                    'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
-                    'placeholder' => 'exemple@gmail.com',
+                    'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3',
                 ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez entrer une adresse email.',
-                    ]),
-                ]
             ])
             ->add('nom', TextType::class, [
                 'label' => 'Nom de réservation :',
@@ -39,16 +33,10 @@ class RegistrationFormType extends AbstractType
                     'class' => 'block mb-2 text-sm font-medium',
                 ],
                 'attr' => [
-                    'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
-                    'placeholder' => 'exemple',
-                ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Le nom ne peut pas être vide.',
-                    ]),
+                    'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3',
                 ],
             ])
-            ->add('plainPassword', RepeatedType::class, [
+            ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,
                 'first_options' => [
@@ -58,12 +46,8 @@ class RegistrationFormType extends AbstractType
                     ],
                     'attr' => [
                         'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3',
-                        'placeholder' => '••••••••',
                     ],
                     'constraints' => [
-                        new NotBlank([
-                            'message' => 'Veuillez entrer un mot de passe.',
-                        ]),
                         new Length([
                             'min' => 6,
                             'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
@@ -71,14 +55,14 @@ class RegistrationFormType extends AbstractType
                         ]),
                     ],
                 ],
+                'required' => false,
                 'second_options' => [
                     'label' => 'Confirmez le mot de passe :',
                     'label_attr' => [
                         'class' => 'block mb-2 text-sm font-medium',
                     ],
                     'attr' => [
-                        'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
-                        'placeholder' => '••••••••',
+                        'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3',
                     ],
                 ],
                 'invalid_message' => 'Les mots de passes doivent être les mêmes.'

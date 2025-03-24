@@ -43,11 +43,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeInterface $created_at;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $created_at;
 
-    #[ORM\Column(type: 'datetime')]
-    private \DateTimeInterface $last_connexion;
+    #[ORM\Column]
+    private \DateTimeImmutable $last_connexion;
 
     #[ORM\Column]
     private bool $isVerified = false;
@@ -163,9 +163,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setCreated_at(): void
     {
-        $this->created_at = new \DateTime();
+        $this->created_at = new \DateTimeImmutable();
 
-        $this->last_connexion = new \DateTime();
+        $this->last_connexion = new \DateTimeImmutable();
+    }
+
+    public function getLast_connexion(): ?\DateTimeImmutable
+    {
+        return $this->last_connexion;
     }
 
     public function isVerified(): bool
