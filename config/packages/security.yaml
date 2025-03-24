@@ -20,6 +20,9 @@ security:
                 login_path: app_login
                 check_path: app_login
                 enable_csrf: true
+                username_parameter: _username
+                password_parameter: _password
+                default_target_path: app_main
             logout:
                 path: app_logout
                 # where to redirect after logout
