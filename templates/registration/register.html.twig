@@ -11,7 +11,7 @@
         <div class="relative bg-[#DADADA] rounded-lg shadow-sm">
             <div class="flex items-center justify-between p-2 pl-4 md:p-5 rounded-t">
                 <h3 class="font-bold">
-                    Inscrivez-vous dès maintenant !
+                    Inscription
                 </h3>
                 <button type="button" class="end-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
                     <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -38,16 +38,15 @@
                     {% endif %}
                     {{ form_widget(registrationForm.nom)}}
                     
-                    {{ form_label(registrationForm.plainPassword) }}
-                    {% if registrationForm.plainPassword.vars.errors|length > 0 %}
-                        {% for error in registrationForm.plainPassword.vars.errors %}
+                    {{ form_label(registrationForm.plainPassword.first) }}
+                    {% if registrationForm.plainPassword.first.vars.errors|length > 0 %}
+                        {% for error in registrationForm.plainPassword.first.vars.errors %}
                             <span class="text-red-500">{{ error.message }}</span>
                         {% endfor %}
                     {% endif %}
-                    {{ form_widget(registrationForm.plainPassword)}}
-                    {# 
-                    {{ form_row(registrationForm.confirmPassword) }}
-                    #}
+                    {{ form_widget(registrationForm.plainPassword.first)}}
+
+                    {{ form_row(registrationForm.plainPassword.second) }}
                     <button type="submit" class="mt-1 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">S'inscrire</button>
                     <div class="text-sm font-medium text-gray-500 dark:text-gray-300 mb-1">
                         <a href="{{ path('app_login') }}" class="text-blue-700 hover:underline dark:text-blue-800">Connexion</a>

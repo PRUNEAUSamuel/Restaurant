@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -48,50 +49,41 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('plainPassword', PasswordType::class, [
-                'label' => 'Mot de passe :',
-                'label_attr' => [
-                    'class' => 'block mb-2 text-sm font-medium',
-                ],
-                'attr' => [
-                    'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
-                    'placeholder' => '••••••••',
-                ],
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
                 'mapped' => false,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez entrer un mot de passe.',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
+                'first_options' => [
+                    'label' => 'Mot de passe :',
+                    'label_attr' => [
+                        'class' => 'block mb-2 text-sm font-medium',
+                    ],
+                    'attr' => [
+                        'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3',
+                        'placeholder' => '••••••••',
+                    ],
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Veuillez entrer un mot de passe.',
+                        ]),
+                        new Length([
+                            'min' => 6,
+                            'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
+                            'max' => 4096,
+                        ]),
+                    ],
                 ],
+                'second_options' => [
+                    'label' => 'Confirmez le mot de passe :',
+                    'label_attr' => [
+                        'class' => 'block mb-2 text-sm font-medium',
+                    ],
+                    'attr' => [
+                        'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
+                        'placeholder' => '••••••••',
+                    ],
+                ],
+                'invalid_message' => 'Les mots de passes doivent être les mêmes.'
             ])
-            /*
-            ->add('confirmPassword', PasswordType::class, [
-                'label' => 'Confirmer le mot de passe :',
-                'label_attr' => [
-                    'class' => 'block mb-2 text-sm font-medium',
-                ],
-                'attr' => [
-                    'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
-                    'placeholder' => '••••••••',
-                    'autocomplete' => 'new-password',
-                ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez confirmer le mot de passe.',
-                    ]),
-                    new EqualTo([
-                        'propertyPath' => 'plainPassword',
-                        'message' => 'Les mots de passe doivent être identiques.',
-                    ])
-                ]
-            ]);
-            */
         ;
     }
 
