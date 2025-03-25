@@ -29,6 +29,7 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
+        $error = null;
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var string $plainPassword */
@@ -49,9 +50,12 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
+
             // do anything else you need here, like send an email
 
-            return $this->render('security/login.html.twig');
+            return $this->render('security/login.html.twig', [
+                'error' => $error,
+            ]);
         }
 
         return $this->render('registration/register.html.twig', [

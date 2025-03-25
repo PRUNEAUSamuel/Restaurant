@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation{% endblock %}
+
+{% block javascripts %}
+    <script defer src="{{asset('js/modal.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <h1>Create new Reservation</h1>
+
+    {{ include('reservation/_form.html.twig') }}
+
+<section class="flex justify-center flex-col text-white bg-cover bg-center h-80 bg-[url(/build/images/page_accueil/fond.jpg)]">
+    <div class="rounded-lg mb-8 bg-black/75 w-2/3 self-center p-4 text-sm">
+        <h1 class="font-bold text-base">La taverne du Chabrulé</h1>
+        <p>1 rue du temple</p>
+        <p>44730</p>
+        <p>Saint-Michel-Chef-Chef</p>
+        <p>07 62 56 89 45</p>
+    </div>
+    <div class="mt-2">
+        <button type="button" class="w-2/5 self-center rounded-lg bg-white/75 p-3 px-7 text-black font-bold">
+            Réserver
+        </button>
+    </div>
+</section>
+<section class="p-5">
+    <h1 class="py-4 font-bold">Notre grande histoire</h1>
+    <p class="text-start p-4 border-t text-sm">
+        <div class="text-start">
+            La taverne du Chabrulé est un restaurant charmant situé à Saint-Michel-Chef-Chef, offrant une expérience culinaire à la fois 
+            raffinée et chaleureuse. Depuis son ouverture en 2010, notre établissement s'est fait un nom grâce à une cuisine qui 
+            allie à la perfection tradition et innovation. Le chef, passionné par les produits locaux et de saison, propose une carte 
+            qui évolue au gré des produits du marché, mettant en avant les saveurs authentiques de la cuisine française.
+        </div>
+        <div class="text-start mt-3">
+            Le décor du restaurant mêle des touches modernes à des éléments classiques, créant ainsi une atmosphère accueillante et 
+            élégante. La salle principale est spacieuse et lumineuse, tandis que notre terrasse vous invite à savourer vos repas en plein 
+            air lors des journées ensoleillées.
+        </div>
+    </p>
+</section>
+<section>
+    <img class="mb-4" src="/build/images/page_accueil/photo1.jpg" alt="image de nourriture"/>
+    <img src="/build/images/page_accueil/photo2.jpg" alt="image de nourriture"/>
+</section>
+
+{% endblock %}

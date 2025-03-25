@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Photos{% endblock %}
+
+{% block body %}
+
+<section class="flex justify-center flex-col text-white bg-cover bg-center h-100 bg-[url(/build/images/page_photo/chef.jpg)]">
+    
+</section>
+<section class="p-5 flex flex-col items-center">
+    <h1 class="py-4 font-bold text-3xl">Pierre Chabrulé</h1>
+    <div class="pt-4 text-sm">
+        <p class="text-start">
+            Pierre naît et grandit à Lyon. Lors de ses vacances, ses grands-parents lui transmettent le travail de 
+            la terre et l’amour de la mer. Depuis qu’il mesure 1 mètre, il sait qu’il veut devenir cuisinier et rêve
+            d’avoir un jour son restaurant. C’est donc naturellement qu’il s’oriente vers un BEP et un baccalauréat 
+            professionnel en cuisine au lycée Hélène Boucher.
+        </p>
+        <p class="text-start mt-3">
+            Jeune chef, il se dirige vers des cuisines de qualité comme La Cour des Loges pour son apprentissage. 
+            Curieux, il part en saison aux Gets en Haute Savoie, puis dans le sud de la France, à Saint Paul-de-Vence. Mais
+            Pierre Chabrulé préfère retourner dans sa ville natale, entre dans le groupe Bocuse et au Restaurant Le Gourmet 
+            de Sèze où il devient son seconde puis chez Jérémy Leplusgrand. Ce dernier lui insuffle suffisamment 
+            confiance pour ouvrir enfin son restaurant, afin d’y réaliser sa propre cuisine.
+        </p>
+    </div>
+</section>
+<section class="flex flex-col items-center pt-3">
+    <div id="controls-carousel" class="relative w-full md:w-5/6" data-carousel="static">
+        <div class="relative h-55 overflow-hidden rounded-lg md:h-130">
+            <!-- Item 1 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <img src="{{asset('images/page_photo/burger.jpg') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="image de burger">
+            </div>
+            <!-- Item 2 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+                <img src="{{asset('images/page_photo/brochette.jpg') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="image de brochette">
+            </div>
+            <!-- Item 3 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <img src="{{asset('images/page_photo/poisson.jpg') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="image de poisson">
+            </div>
+            <!-- Item 4 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <img src="{{asset('images/page_photo/steak.jpg') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="image de steak">
+            </div>
+            <!-- Item 5 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <img src="{{asset('images/page_photo/salade.jpg') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="image de salade">
+            </div>
+        </div>
+        <!-- Slider controls -->
+        <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                </svg>
+                <span class="sr-only">Previous</span>
+            </span>
+        </button>
+        <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                </svg>
+                <span class="sr-only">Next</span>
+            </span>
+        </button>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,8 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Connexion{% endblock %}
+
+{% block javascripts %}
+    <script defer src="{{asset('js/modal.js') }}"></script>
+{% endblock %}
  
 {% block body %}
+
+{% if app.user %}
+    <script>
+        window.location.href = "{{ path('app_main') }}";
+    </script>
+{% endif %}
+
 <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" id="registerButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal" style="display:none;">
     S'inscrire
 </button>
@@ -28,9 +39,9 @@
                         </div>
                     {% endif %}
                     <label for="username" class="block mb-2 text-sm font-medium">Adresse email :</label>
-                    <input type="email" name="_username" id="username" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="email" required autofocus>
+                    <input placeholder="exemple@gmail.com" type="email" name="_username" id="username" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required autofocus>
                     <label for="password" class="block mb-2 text-sm font-medium">Mot de passe :</label>
-                    <input type="password" name="_password" id="password" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="current-password" required>
+                    <input placeholder="••••••••" type="password" name="_password" id="password" class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     <button class="mt-1 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">Se connecter</button>
                     <div class="text-sm font-medium text-gray-500 dark:text-gray-300 mb-1">
@@ -59,10 +70,17 @@
 <section class="p-5">
     <h1 class="py-4 font-bold">Notre grande histoire</h1>
     <p class="text-start p-4 border-t text-sm">
-        qzessfrir gerfhfygv ntfgdfghn gyj,gyh j,yfgthj  jyfghj gyh jyghgj ,yhgt j yguh rtytgyutygujhutgyfy fyuj tyh
-        tyhgkuythuiohhtr h jytgijohojdrtjgh reuihgjkjf htfg
-
-        erg rt hty j yt j
+        <div class="text-start">
+            La taverne du Chabrulé est un restaurant charmant situé à Saint-Michel-Chef-Chef, offrant une expérience culinaire à la fois 
+            raffinée et chaleureuse. Depuis son ouverture en 2010, notre établissement s'est fait un nom grâce à une cuisine qui 
+            allie à la perfection tradition et innovation. Le chef, passionné par les produits locaux et de saison, propose une carte 
+            qui évolue au gré des produits du marché, mettant en avant les saveurs authentiques de la cuisine française.
+        </div>
+        <div class="text-start mt-3">
+            Le décor du restaurant mêle des touches modernes à des éléments classiques, créant ainsi une atmosphère accueillante et 
+            élégante. La salle principale est spacieuse et lumineuse, tandis que notre terrasse vous invite à savourer vos repas en plein 
+            air lors des journées ensoleillées.
+        </div>
     </p>
 </section>
 <section>
@@ -70,17 +88,4 @@
     <img src="/build/images/page_accueil/photo2.jpg" alt="image de nourriture"/>
 </section>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-        var myModal = document.getElementById('authentication-modal');
-
-        myModal.classList.remove('hidden');
-    });
-
-    document.getElementById('closeModal').addEventListener('click', function() {
-
-        modal.classList.add('hidden');
-    });
-</script>
 {% endblock %}

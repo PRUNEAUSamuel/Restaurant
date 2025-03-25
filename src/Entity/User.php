@@ -173,6 +173,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->last_connexion;
     }
 
+    public function setLast_connexion(?\DateTimeImmutable $lastLogin): self
+    {
+        $this->last_connexion = $lastLogin;
+
+        return $this;
+    }
+
     public function isVerified(): bool
     {
         return $this->isVerified;
