@@ -3,10 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\ReservationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
+use App\Entity\Tables;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
@@ -16,29 +17,20 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "reservations")]
     private ?User $user = null;
 
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
-    private ?\DateTimeInterface $date = null;
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private ?\DateTimeImmutable $date = null;
 
     #[ORM\Column(type: Types::TIME_IMMUTABLE)]
-    private ?\DateTimeInterface $arrivalTime = null;
+    private ?\DateTimeImmutable $arrivalTime = null;
 
     #[ORM\Column]
     private ?int $nombre = null;
 
-    /**
-     * @var Collection<int, Tables>
-     */
-    #[ORM\ManyToMany(targetEntity: Tables::class, mappedBy: 'relation')]
-    private Collection $tables;
-
-    public function __construct()
-    {
-        $this->tables = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(targetEntity: Tables::class, inversedBy: 'reservation')]
+    private ?Tables $tables = null;
 
     public function getId(): ?int
     {
@@ -50,31 +42,31 @@ class Reservation
         return $this->user;
     }
 
-    public function setUser(?User $user): static
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?\DateTimeImmutable
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(\DateTimeImmutable $date): self
     {
         $this->date = $date;
 
         return $this;
     }
 
-    public function getArrivalTime(): ?\DateTimeInterface
+    public function getArrivalTime(): ?\DateTimeImmutable
     {
         return $this->arrivalTime;
     }
 
-    public function setArrivalTime(\DateTimeInterface $arrivalTime): self
+    public function setArrivalTime(\DateTimeImmutable $arrivalTime): self
     {
         $this->arrivalTime = $arrivalTime;
 
@@ -93,29 +85,14 @@ class Reservation
         return $this;
     }
 
-    /**
-     * @return Collection<int, Tables>
-     */
-    public function getTables(): Collection
+    public function getTable(): ?Tables
     {
         return $this->tables;
     }
 
-    public function addTable(Tables $table): static
+    public function setTable(?Tables $tables): self
     {
-        if (!$this->tables->contains($table)) {
-            $this->tables->add($table);
-            $table->addRelation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTable(Tables $table): static
-    {
-        if ($this->tables->removeElement($table)) {
-            $table->removeRelation($this);
-        }
+        $this->tables = $tables;
 
         return $this;
     }

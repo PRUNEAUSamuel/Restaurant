@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Route('/reservation')]
 final class ReservationController extends AbstractController
@@ -26,43 +27,34 @@ final class ReservationController extends AbstractController
         ]);
     }
 
-    #[Route('/reservation', name: 'app_reservation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, SessionInterface $session, EntityManagerInterface $entityManager): Response
+    #[Route('/', name: 'app_reservation_new', methods: ['POST'])]
+    public function new(Request $request, SessionInterface $session, EntityManagerInterface $entityManager, UserInterface $user): Response
     {
         $reservation = new Reservation();
 
-        // Récupérer toutes les tables disponibles
-        $tables = $entityManager->getRepository(Tables::class)->findAll();
+        $step = null;
 
-        // Filtrer les doublons en utilisant le nombre de places comme clé
-        $uniqueTables = [];
-        foreach ($tables as $table) {
-            $nbPlaces = $table->getNbPlaces();
-            if (!isset($uniqueTables[$nbPlaces])) {
-                // Ajouter la table uniquement si ce nombre de places n'a pas déjà été ajouté
-                $uniqueTables[$nbPlaces] = $table;
-            }
+        if ($session->get('reservation_date')) {
+            $step = 2;
         }
 
-        // Convertir le tableau associatif en un tableau d'objets
-        $uniqueTables = array_values($uniqueTables);
+        if ($session->get('reservation_time')) {
+            $step = 3;
+        }
 
-        // Trier les tables par nombre de places
-        usort($uniqueTables, function ($a, $b) {
-            return $a->getNbPlaces() - $b->getNbPlaces();
-        });
-
-        $step = $request->get('step', 1);
-
-        if ($step === 1) {
+        if ($step === null) {
             $form = $this->createForm(ReservationType1::class, $reservation);
 
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                // Sauvegarder la table dans la session
+
+                $date = $reservation->getDate(); // Cela peut être une instance de \DateTime
+                if ($date instanceof \DateTime) {
+                    $reservation->setDate(\DateTimeImmutable::createFromMutable($date));
+                }
                 $session->set('reservation_date', $reservation->getDate());
-                return $this->redirectToRoute('app_reservation_new', ['step' => 2]);
+                return $this->redirectToRoute('app_reservation_new');
             }
 
             return $this->render('reservation/step1.html.twig', [
@@ -79,7 +71,7 @@ final class ReservationController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 // Sauvegarder l'heure d'arrivée dans la session
                 $session->set('reservation_time', $reservation->getArrivalTime());
-                return $this->redirectToRoute('app_reservation_new', ['step' => 3]);
+                return $this->redirectToRoute('app_reservation_new');
             }
 
             return $this->render('reservation/step2.html.twig', [
@@ -89,16 +81,39 @@ final class ReservationController extends AbstractController
 
 
         if ($step === 3) {
+            // Récupérer toutes les tables disponibles
+            $tables = $entityManager->getRepository(Tables::class)->findAll();
+
+            // Filtrer les doublons en utilisant le nombre de places comme clé
+            $uniqueTables = [];
+            foreach ($tables as $table) {
+                $nbPlaces = $table->getNbPlaces();
+                if (!isset($uniqueTables[$nbPlaces])) {
+                    // Ajouter la table uniquement si ce nombre de places n'a pas déjà été ajouté
+                    $uniqueTables[$nbPlaces] = $table;
+                }
+            }
+
+            // Convertir le tableau associatif en un tableau d'objets
+            $uniqueTables = array_values($uniqueTables);
+
+            // Trier les tables par nombre de places
+            usort($uniqueTables, function ($a, $b) {
+                return $a->getNbPlaces() - $b->getNbPlaces();
+            });
+
             $form = $this->createForm(ReservationType3::class, $reservation, [
-                'tables' => $tables,
+                'tables' => $uniqueTables,
             ]);
 
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-
-                $reservation->setdate($session->get('reservation_date'));
+                $reservation->setUser($user);
+                $reservation->setDate($session->get('reservation_date'));
                 $reservation->setArrivalTime($session->get('reservation_time'));
+                $selectedTables = $form->get('tables')->getData();
+                $reservation->setTable($selectedTables);
                 // Sauvegarder la table dans la session
                 $entityManager->persist($reservation);
                 $entityManager->flush();

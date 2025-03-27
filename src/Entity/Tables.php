@@ -21,15 +21,13 @@ class Tables
     #[ORM\Column]
     private ?int $table_number = null;
 
-    /**
-     * @var Collection<int, reservation>
-     */
-    #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: 'tables')]
-    private Collection $relation;
+ 
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'tables')]
+    private Collection $reservations;
 
     public function __construct()
     {
-        $this->relation = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -61,26 +59,23 @@ class Tables
         return $this;
     }
 
-    /**
-     * @return Collection<int, reservation>
-     */
-    public function getRelation(): Collection
+    public function getReservations(): Collection
     {
-        return $this->relation;
+        return $this->reservations;
     }
 
-    public function addRelation(reservation $relation): static
+    public function addReservations(Reservation $reservations): static
     {
-        if (!$this->relation->contains($relation)) {
-            $this->relation->add($relation);
+        if (!$this->reservations->contains($reservations)) {
+            $this->reservations->add($reservations);
         }
 
         return $this;
     }
 
-    public function removeRelation(reservation $relation): static
+    public function removeRelation(Reservation $reservations): static
     {
-        $this->relation->removeElement($relation);
+        $this->reservations->removeElement($reservations);
 
         return $this;
     }

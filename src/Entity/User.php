@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -51,6 +53,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private bool $isVerified = false;
+
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: "user")]
+    private Collection $reservations;
 
     public function getId(): ?int
     {
@@ -142,6 +147,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()     
     {         
         $this->roles = [self::ROLE_USER];
+        $this->reservations = new ArrayCollection();
     }
 
     public function getNom(): ?string
@@ -191,4 +197,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     } 
+
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function setReservations(Collection $reservations): self
+    {
+        // Vider la collection actuelle de réservations
+        $this->reservations = $reservations;
+
+        // Associer la relation inverse à chaque réservation
+        foreach ($reservations as $reservation) {
+            $reservation->setUser($this); // Associe chaque réservation à cet utilisateur
+        }
+
+        return $this;
+    }
 }
