@@ -18,10 +18,13 @@ class Reservation
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $user = null;
+    private ?User $user = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeInterface $date = null;
+
+    #[ORM\Column(type: Types::TIME_IMMUTABLE)]
+    private ?\DateTimeInterface $arrivalTime = null;
 
     #[ORM\Column]
     private ?int $nombre = null;
@@ -42,12 +45,12 @@ class Reservation
         return $this->id;
     }
 
-    public function getUser(): ?users
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?users $user): static
+    public function setUser(?User $user): static
     {
         $this->user = $user;
 
@@ -59,9 +62,21 @@ class Reservation
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): static
+    public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getArrivalTime(): ?\DateTimeInterface
+    {
+        return $this->arrivalTime;
+    }
+
+    public function setArrivalTime(\DateTimeInterface $arrivalTime): self
+    {
+        $this->arrivalTime = $arrivalTime;
 
         return $this;
     }
