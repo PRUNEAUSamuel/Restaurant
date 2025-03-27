@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ReservationRepository;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
@@ -26,11 +25,8 @@ class Reservation
     #[ORM\Column(type: Types::TIME_IMMUTABLE)]
     private ?\DateTimeImmutable $arrivalTime = null;
 
-    #[ORM\Column]
-    private ?int $nombre = null;
-
-    #[ORM\ManyToOne(targetEntity: Tables::class, inversedBy: 'reservation')]
-    private ?Tables $tables = null;
+    #[ORM\ManyToOne(targetEntity: Tables::class, inversedBy: 'reservations')]
+    private ?Tables $table = null;
 
     public function getId(): ?int
     {
@@ -73,26 +69,14 @@ class Reservation
         return $this;
     }
 
-    public function getNombre(): ?int
-    {
-        return $this->nombre;
-    }
-
-    public function setNombre(int $nombre): static
-    {
-        $this->nombre = $nombre;
-
-        return $this;
-    }
-
     public function getTable(): ?Tables
     {
-        return $this->tables;
+        return $this->table;
     }
 
-    public function setTable(?Tables $tables): self
+    public function setTable(?Tables $table): self
     {
-        $this->tables = $tables;
+        $this->table = $table;
 
         return $this;
     }

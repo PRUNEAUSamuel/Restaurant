@@ -14,7 +14,7 @@ class ReservationType3 extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('tables', ChoiceType::class, [
+            ->add('table', ChoiceType::class, [
                 'choices' => $options['tables'],
                 'choice_label' => function(Tables $tables) {
                     return $tables->getNbPlaces() . ' personnes';

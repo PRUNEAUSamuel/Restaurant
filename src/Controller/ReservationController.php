@@ -14,11 +14,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Route('/reservation')]
 final class ReservationController extends AbstractController
 {
+
     #[Route(name: 'app_reservation_index', methods: ['GET'])]
     public function index(ReservationRepository $reservationRepository): Response
     {
@@ -27,10 +27,18 @@ final class ReservationController extends AbstractController
         ]);
     }
 
-    #[Route('/', name: 'app_reservation_new', methods: ['POST'])]
-    public function new(Request $request, SessionInterface $session, EntityManagerInterface $entityManager, UserInterface $user): Response
+    #[Route('/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, SessionInterface $session, EntityManagerInterface $entityManager): Response
     {
         $reservation = new Reservation();
+
+        /** @var \App\Entity\User $user */
+
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
 
         $step = null;
 
@@ -112,7 +120,7 @@ final class ReservationController extends AbstractController
                 $reservation->setUser($user);
                 $reservation->setDate($session->get('reservation_date'));
                 $reservation->setArrivalTime($session->get('reservation_time'));
-                $selectedTables = $form->get('tables')->getData();
+                $selectedTables = $form->get('table')->getData();
                 $reservation->setTable($selectedTables);
                 // Sauvegarder la table dans la session
                 $entityManager->persist($reservation);
@@ -120,7 +128,9 @@ final class ReservationController extends AbstractController
 
                 $session->clear();  // Réinitialiser la session
 
-                return $this->redirectToRoute('app_user_edit', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_user_edit', [
+                    'id' => $user->getId(),
+                ], Response::HTTP_SEE_OTHER);
             }
 
             return $this->render('reservation/step3.html.twig', [

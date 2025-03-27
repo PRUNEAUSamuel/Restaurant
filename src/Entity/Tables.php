@@ -22,7 +22,7 @@ class Tables
     private ?int $table_number = null;
 
  
-    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'tables')]
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'table')]
     private Collection $reservations;
 
     public function __construct()
