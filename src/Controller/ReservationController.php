@@ -66,14 +66,18 @@ final class ReservationController extends AbstractController
             $form = $this->createForm(ReservationType1::class, $reservation);
 
             $form->handleRequest($request);
+  // test
 
             if ($form->isSubmitted() && $form->isValid()) {
 
+
                 $date = $reservation->getDate(); // Cela peut être une instance de \DateTime
+               
                 if ($date instanceof \DateTime) {
                     $reservation->setDate(\DateTimeImmutable::createFromMutable($date));
                 }
                 $session->set('reservation_date', $reservation->getDate());
+
                 return $this->redirectToRoute('app_reservation_new');
             }
 
@@ -90,8 +94,11 @@ final class ReservationController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+            
                 // Sauvegarder l'heure d'arrivée dans la session
                 $session->set('reservation_time', $reservation->getArrivalTime());
+               
+
                 return $this->redirectToRoute('app_reservation_new');
             }
 

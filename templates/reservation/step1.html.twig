@@ -4,6 +4,22 @@
 
 {% block javascripts %}
     <script defer src="{{asset('js/modal.js') }}"></script>
+    {{ parent() }}
+    <script defer>
+      document.addEventListener("DOMContentLoaded", function () {
+            const dateInput = document.querySelector('input[name$="[date]"]');
+            if (!dateInput) return;
+
+            dateInput.addEventListener("change", function () {
+                localStorage.setItem("selectedReservationDate", dateInput.value);
+            });
+
+            // Initialiser si déjà rempli
+            if (dateInput.value) {
+                localStorage.setItem("selectedReservationDate", dateInput.value);
+            }
+        });
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -28,7 +44,13 @@
             <div class="p-4 md:p-5 py-1">
                 {{ form_start(form, {'attr': {'class': 'space-y-3'}}) }}
 
-                    {{ form_row(form.date) }}
+                    {{ form_label(form.date) }}
+                    {% if form.date.vars.errors|length > 0 %}
+                        {% for error in form.date.vars.errors %}
+                            <span class="text-red-500">{{ error.message }}</span>
+                        {% endfor %}
+                    {% endif %}
+                    {{ form_widget(form.date)}}
 
                     <p class="block mt-3 text-sm font-medium">Nom de réservation :</p>
                     <p class="mt-4 mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3">{{ user.nom }}</p>
