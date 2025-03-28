@@ -22,9 +22,21 @@ final class ReservationController extends AbstractController
     #[Route(name: 'app_reservation_index', methods: ['GET'])]
     public function index(ReservationRepository $reservationRepository): Response
     {
-        return $this->render('reservation/index.html.twig', [
-            'reservations' => $reservationRepository->findAll(),
-        ]);
+        /** @var \App\Entity\User $user */
+
+        $user = $this->getUser();
+
+        if ($user) {
+            // Récupérer toutes les réservations de l'utilisateur
+            $reservations = $reservationRepository->findByUser($user);
+
+            return $this->render('reservation/index.html.twig', [
+                'reservations' => $reservations,
+            ]);
+        }
+
+        // Si l'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+        return $this->redirectToRoute('app_login');
     }
 
     #[Route('/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
@@ -67,6 +79,7 @@ final class ReservationController extends AbstractController
 
             return $this->render('reservation/step1.html.twig', [
                 'form' => $form->createView(),
+                'user' => $user,
             ]);
         }
 
@@ -84,6 +97,7 @@ final class ReservationController extends AbstractController
 
             return $this->render('reservation/step2.html.twig', [
                 'form' => $form->createView(),
+                'user' => $user,
             ]);
         }
 
@@ -135,6 +149,7 @@ final class ReservationController extends AbstractController
 
             return $this->render('reservation/step3.html.twig', [
                 'form' => $form->createView(),
+                'user' => $user,
             ]);
         }
 

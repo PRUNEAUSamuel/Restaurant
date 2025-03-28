@@ -27,10 +27,10 @@
         {{ form_row(form.password.second) }}
 
         <p class="block mb-2 text-sm font-medium">Date de création :</p>
-        <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3">{{ user.created_at ? user.created_at|date('Y-m-d H:i:s') : '' }}</p>
+        <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3">{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</p>
 
         <p class="block mb-2 text-sm font-medium">Dernière connexion :</p>
-        <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3">{{ user.last_connexion ? user.last_connexion|date('Y-m-d H:i:s') : '' }}</p>
+        <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3">{{ user.lastConnexion ? user.lastConnexion|date('Y-m-d H:i:s') : '' }}</p>
 
         <p class="block mb-2 text-sm font-medium">Compte vérifié :</p>
         <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3">{{ user.isVerified ? 'Yes' : 'No' }}</p>

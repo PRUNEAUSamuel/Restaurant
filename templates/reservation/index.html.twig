@@ -1,37 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reservation index{% endblock %}
+{% block title %}Mes réservations{% endblock %}
 
 {% block body %}
-    <h1>Reservation index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Nombre</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for reservation in reservations %}
-            <tr>
-                <td>{{ reservation.id }}</td>
-                <td>{{ reservation.date ? reservation.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ reservation.nombre }}</td>
-                <td>
-                    <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">show</a>
-                    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
-                </td>
-            </tr>
+    <div class="my-3">
+		<h1 class="font-bold text-2xl">Mes réservations en cours</h1>
+    </div>
+    <div>
+        {% if reservations is empty %}!
+            <p class="my-5">Vous n'avez aucune réservation en cours.</p>
         {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_reservation_new') }}">Create new</a>
+            <ul class="list-group list-group-flush">
+                {% for reservation in reservations %}
+                    <li class="list-group-item m-6 border rounded p-2 bg-[#f9e1e2]">
+                        <div class="flex justify-between p-1 m-2 rounded bg-white">
+                            <p>Date :</p>
+                            <p>{{ reservation.date ? reservation.date|date('Y-m-d') : '' }}</p>
+                        </div>
+                        <div class="flex justify-between p-1 m-2 rounded bg-white">
+                            <p>Heure d'arrivée :</p>
+                            <p>{{ reservation.arrivalTime ? reservation.arrivalTime|date('H:i') : '' }}</p>
+                        </div>
+                        <div class="flex justify-between p-1 m-2 rounded bg-white">
+                            <p>Nombre de personnes :</p>
+                            <p>{{ reservation.table ? reservation.table.getNbPlaces() : '' }}</p>
+                        </div>
+                        <div class="flex justify-between p-1 m-2 rounded bg-white">
+                            <p>Nom de réservation :</p>
+                            <p>{{ reservation.user ? reservation.user.getNom() : '' }}</p>
+                        </div>
+                        <div class="d-flex justify-content-end align-items-center">
+                            <form method="post" action="{{ path('app_reservation_delete', {'id': reservation.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir annuler votre réservation ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reservation.id) }}">
+                                <button class="mt-1 w-4/5 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="submit">Annuler la réservation</button>
+                            </form>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 {% endblock %}

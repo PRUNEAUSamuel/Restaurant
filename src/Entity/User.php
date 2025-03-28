@@ -46,16 +46,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $nom = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $created_at;
+    private ?\DateTimeImmutable $createdAt;
 
     #[ORM\Column]
-    private \DateTimeImmutable $last_connexion;
+    private \DateTimeImmutable $lastConnexion;
 
     #[ORM\Column]
     private bool $isVerified = false;
 
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: "user")]
     private Collection $reservations;
+
+    #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: "user")]
+    private Collection $comments;
 
     public function getId(): ?int
     {
@@ -148,6 +151,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {         
         $this->roles = [self::ROLE_USER];
         $this->reservations = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getNom(): ?string
@@ -162,26 +166,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCreated_at(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreated_at(): void
+    public function setCreatedAt(): void
     {
-        $this->created_at = new \DateTimeImmutable();
+        $this->createdAt = new \DateTimeImmutable();
 
-        $this->last_connexion = new \DateTimeImmutable();
+        $this->lastConnexion = new \DateTimeImmutable();
     }
 
-    public function getLast_connexion(): ?\DateTimeImmutable
+    public function getLastConnexion(): ?\DateTimeImmutable
     {
-        return $this->last_connexion;
+        return $this->lastConnexion;
     }
 
-    public function setLast_connexion(?\DateTimeImmutable $lastLogin): self
+    public function setLastConnexion(?\DateTimeImmutable $lastLogin): self
     {
-        $this->last_connexion = $lastLogin;
+        $this->lastConnexion = $lastLogin;
 
         return $this;
     }
@@ -211,6 +215,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // Associer la relation inverse à chaque réservation
         foreach ($reservations as $reservation) {
             $reservation->setUser($this); // Associe chaque réservation à cet utilisateur
+        }
+
+        return $this;
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function setComments(Collection $comments): self
+    {
+        // Vider la collection actuelle de commentaire
+        $this->comments = $comments;
+
+        // Associer la relation inverse à chaque commentaire
+        foreach ($comments as $comment) {
+            $comment->setUser($this); // Associe chaque commentaire à cet utilisateur
         }
 
         return $this;

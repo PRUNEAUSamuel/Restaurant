@@ -22,7 +22,7 @@ class LoginListener
 
         if ($user instanceof User) {
 
-            $user->setLast_connexion(new \DateTimeImmutable());
+            $user->setLastConnexion(new \DateTimeImmutable());
 
             $this->entityManager->flush();
         }

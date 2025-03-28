@@ -16,28 +16,19 @@ class CommentsRepository extends ServiceEntityRepository
         parent::__construct($registry, Comments::class);
     }
 
-    //    /**
-    //     * @return Comments[] Returns an array of Comments objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * Trouve toutes les réservations d'un utilisateur
+     *
+     * @param \App\Entity\User $user
+     * @return Comments[]
+     */
 
-    //    public function findOneBySomeField($value): ?Comments
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+     public function findByUser($user)
+     {
+         return $this->createQueryBuilder('r')
+             ->andWhere('r.user = :user')
+             ->setParameter('user', $user)
+             ->getQuery()
+             ->getResult();
+     }
 }

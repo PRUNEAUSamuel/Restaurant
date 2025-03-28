@@ -16,10 +16,10 @@ class Tables
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $nb_places = null;
+    private ?int $nbPlaces = null;
 
     #[ORM\Column]
-    private ?int $table_number = null;
+    private ?int $tableNumber = null;
 
  
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'table')]
@@ -37,24 +37,24 @@ class Tables
 
     public function getNbPlaces(): ?int
     {
-        return $this->nb_places;
+        return $this->nbPlaces;
     }
 
-    public function setNbPlaces(int $nb_places): static
+    public function setNbPlaces(int $nbPlaces): static
     {
-        $this->nb_places = $nb_places;
+        $this->nbPlaces = $nbPlaces;
 
         return $this;
     }
 
     public function getTableNumber(): ?int
     {
-        return $this->table_number;
+        return $this->tableNumber;
     }
 
-    public function setTableNumber(int $table_number): static
+    public function setTableNumber(int $tableNumber): static
     {
-        $this->table_number = $table_number;
+        $this->tableNumber = $tableNumber;
 
         return $this;
     }
