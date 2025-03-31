@@ -32,7 +32,7 @@
         <div class="relative bg-[#DADADA] rounded-lg shadow-sm">
             <div class="flex items-center justify-between p-2 pl-4 md:p-5 rounded-t">
                 <h3 class="font-bold">
-                    Réservez une table
+                    Réservez votre table 1/3
                 </h3>
                 <button type="button" class="end-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
                     <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -50,7 +50,7 @@
                             <span class="text-red-500">{{ error.message }}</span>
                         {% endfor %}
                     {% endif %}
-                    {{ form_widget(form.date)}}
+                    {{ form_widget(form.date) }}
 
                     <p class="block mt-3 text-sm font-medium">Nom de réservation :</p>
                     <p class="mt-4 mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3">{{ user.nom }}</p>

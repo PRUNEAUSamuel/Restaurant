@@ -12,14 +12,14 @@
         {% else %}
             <div>
                 {% for comment in comments %}
-					<div class="flex flex-col m-6 border rounded bg-[#f9e1e2]">
+					<div class="flex flex-col m-6 border border-gray-400 rounded bg-[#f9e1e2]">
                         <span class="p-1 m-2">{{ comment.user.nom }}</span>
                         <p class="p-2 m-2 rounded bg-white text-start">{{ comment.content }}</p>
                         <span class="p-1 m-2">{{ comment.createdAt|date('d/m/Y H:i:s') }}</span>
                         <div class="d-flex justify-content-end align-items-center">
                             <form method="post" action="{{ path('app_reservation_delete', {'id': comment.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer votre commentaire ?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
-                                <button class="mb-2 w-4/5 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="submit">Supprimer le commentaire</button>
+                                <button class="mb-2 w-4/5 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="submit">Supprimer</button>
                             </form>
                         </div>
                     </div>

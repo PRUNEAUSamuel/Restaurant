@@ -66,7 +66,6 @@ final class ReservationController extends AbstractController
             $form = $this->createForm(ReservationType1::class, $reservation);
 
             $form->handleRequest($request);
-  // test
 
             if ($form->isSubmitted() && $form->isValid()) {
 
@@ -110,8 +109,42 @@ final class ReservationController extends AbstractController
 
 
         if ($step === 3) {
-            // Récupérer toutes les tables disponibles
+            $reservationTime = $session->get('reservation_time');
+            $startTimeSoir = \DateTime::createFromFormat('H:i', '19:00');
+            $endTimeSoir = \DateTime::createFromFormat('H:i', '20:45');
+            $startTime = \DateTime::createFromFormat('H:i', '12:00');
+            $endTime = \DateTime::createFromFormat('H:i', '13:45');
+            if ($reservationTime >= $startTimeSoir && $reservationTime <= $endTimeSoir) {
+                $reservations = $entityManager->getRepository(Reservation::class)
+                    ->createQueryBuilder('r')
+                    ->where('r.date = :reservationDate')
+                    ->andWhere('r.arrivalTime BETWEEN :startTimeSoir AND :endTimeSoir')
+                    ->setParameter('reservationDate', $session->get('reservation_date'))
+                    ->setParameter('startTimeSoir', $startTimeSoir->format('H:i:s'))
+                    ->setParameter('endTimeSoir', $endTimeSoir->format('H:i:s'))
+                    ->getQuery()
+                    ->getResult();
+            } else {
+                $reservations = $entityManager->getRepository(Reservation::class)
+                    ->createQueryBuilder('r')
+                    ->where('r.date = :reservationDate')
+                    ->andWhere('r.arrivalTime BETWEEN :startTime AND :endTime')
+                    ->setParameter('reservationDate', $session->get('reservation_date'))
+                    ->setParameter('startTime', $startTime->format('H:i:s'))
+                    ->setParameter('endTime', $endTime->format('H:i:s'))
+                    ->getQuery()
+                    ->getResult();
+            }
+
+            // récupérer toutes les tables disponibles
             $tables = $entityManager->getRepository(Tables::class)->findAll();
+
+            // on récupère les tables qui sont déjà prises sur ce créneau
+            $takenTableIds = array_map(fn($reservation) => $reservation->getTable()->getId(), $reservations);
+
+            // on les filtres afin de ne récupérer que celles disponibles
+            $tables = array_filter($tables, fn($table) => !in_array($table->getId(), $takenTableIds));
+
 
             // Filtrer les doublons en utilisant le nombre de places comme clé
             $uniqueTables = [];
@@ -143,7 +176,6 @@ final class ReservationController extends AbstractController
                 $reservation->setArrivalTime($session->get('reservation_time'));
                 $selectedTables = $form->get('table')->getData();
                 $reservation->setTable($selectedTables);
-                // Sauvegarder la table dans la session
                 $entityManager->persist($reservation);
                 $entityManager->flush();
 
