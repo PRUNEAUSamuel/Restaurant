@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Reservation;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -72,6 +73,7 @@ final class UserController extends AbstractController
 
         $request->getSession()->invalidate();
 
+        
         return $this->redirectToRoute('app_login');
     }
 }
