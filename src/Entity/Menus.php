@@ -25,6 +25,10 @@ class Menus
     #[ORM\JoinTable(name: "produit_menu")]
     public Collection $produits;
 
+
+    #[ORM\Column(type: "boolean")]
+    public ?bool $actualMenu = false;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();

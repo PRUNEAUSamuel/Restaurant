@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Menus;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class MenusCrudController extends AbstractCrudController
@@ -18,6 +19,7 @@ class MenusCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name'),
+            BooleanField::new('actualMenu'),
             AssociationField::new('produits')
                 ->setFormTypeOption('multiple', true)
                 ->setFormTypeOption('by_reference', false)
