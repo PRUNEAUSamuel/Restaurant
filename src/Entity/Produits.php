@@ -18,8 +18,8 @@ class Produits
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column]
-    private ?int $price = null;
+    #[ORM\Column(type: "decimal", precision: 10, scale: 2)]
+    private ?float $price = null;
 
     #[ORM\Column(length: 255)]
     private ?string $categorie = null;
@@ -27,13 +27,17 @@ class Produits
     /**
      * @var Collection<int, Menus>
      */
-    #[ORM\ManyToMany(targetEntity: Menus::class, inversedBy: 'produits')]
-    #[ORM\JoinTable(name: "produit_menu")]
-    private Collection $menus;
+    #[ORM\ManyToMany(targetEntity: Menus::class, mappedBy: 'produits')]
+    public Collection $menus;
 
     public function __construct()
     {
         $this->menus = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -53,12 +57,12 @@ class Produits
         return $this;
     }
 
-    public function getPrice(): ?int
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice(int $price): static
+    public function setPrice(float $price): static
     {
         $this->price = $price;
 

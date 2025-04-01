@@ -17,6 +17,7 @@ class Reservation
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "reservations")]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]

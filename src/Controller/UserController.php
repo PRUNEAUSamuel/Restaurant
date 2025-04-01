@@ -58,7 +58,7 @@ final class UserController extends AbstractController
         return $this->render('user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
-        ]);
+        ]); 
     }
 
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]

@@ -54,10 +54,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
-    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: "user")]
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: "user", cascade: ['remove'])]
     private Collection $reservations;
 
-    #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: "user")]
+    #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: "user", cascade: ['remove'])]
     private Collection $comments;
 
     public function getId(): ?int

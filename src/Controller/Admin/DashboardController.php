@@ -2,6 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Comments;
+use App\Entity\Menus;
+use App\Entity\Produits;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -11,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use App\Entity\User;
 use App\Entity\Reservation;
+use App\Entity\Tables;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
@@ -30,7 +34,11 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToCrud('User', 'fa fa-home', User::class);
-        yield MenuItem::linkToCrud('Reservation', 'fas fa-list', Reservation::class);
+        yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class);
+        yield MenuItem::linkToCrud('Reservations', 'fa fa-calendar', Reservation::class);
+        yield MenuItem::linkToCrud('Tables', 'fas fa-map', Tables::class);
+        yield MenuItem::linkToCrud('Produits', 'fas fa-coffee', Produits::class);
+        yield MenuItem::linkToCrud('Menus', 'fas fa-book', Menus::class);
+        yield MenuItem::linkToCrud('Comments', 'fas fa-comment', Comments::class);
     }
 }

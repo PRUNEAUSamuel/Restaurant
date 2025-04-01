@@ -21,12 +21,18 @@ class Menus
     /**
      * @var Collection<int, produits>
      */
-    #[ORM\ManyToMany(targetEntity: Produits::class, mappedBy: 'menus')]
-    private Collection $produits;
+    #[ORM\ManyToMany(targetEntity: Produits::class, inversedBy: 'menus')]
+    #[ORM\JoinTable(name: "produit_menu")]
+    public Collection $produits;
 
     public function __construct()
     {
         $this->produits = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 
     public function getId(): ?int
