@@ -9,20 +9,39 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class MenuController extends AbstractController
 {
-    #[Route('/menu/{id}', name: 'app_menu')]
-    public function index($id, MenusRepository $menusRepository): Response
+    #[Route('/menu', name: 'app_menu')]
+    public function index(MenusRepository $menusRepository): Response
     {
-        $menu = $menusRepository->find($id);
+        $menu = $menusRepository->findOneBy([
+            'actualMenu' => true
+        ]);
 
         if (!$menu) {
             throw $this->createNotFoundException('Menu not found');
         }
 
-        $produits = $menu->getProduits();
+        $produit = $menu->getProduits();
+        $produits = $produit->toArray();
+
+        $entrees = array_filter($produits, function($produit) {
+            return $produit->getCategorie() === 'entree';
+        });
+        $plats = array_filter($produits, function($produit) {
+            return $produit->getCategorie() === 'plat';
+        });
+        $desserts = array_filter($produits, function($produit) {
+            return $produit->getCategorie() === 'dessert';
+        });
+        $boissons = array_filter($produits, function($produit) {
+            return $produit->getCategorie() === 'boisson';
+        });
 
         return $this->render('main/menus.html.twig', [
             'menu' => $menu,
-            'produits' => $produits,
+            'entrees' => $entrees,
+            'plats' => $plats,
+            'desserts' => $desserts,
+            'boissons' => $boissons,
         ]);
     }
 }
