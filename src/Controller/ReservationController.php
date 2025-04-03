@@ -39,6 +39,24 @@ final class ReservationController extends AbstractController
         return $this->redirectToRoute('app_login');
     }
 
+    #[Route('/clear', name: 'app_reservation_clear', methods: ['GET', 'POST'])]
+    public function clear(SessionInterface $session): Response
+    {
+        $session->remove('reservation_date');
+        $session->remove('reservation_time');
+
+        /** @var \App\Entity\User $user */
+
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->redirectToRoute('app_main');
+    }
+
+
     #[Route('/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SessionInterface $session, EntityManagerInterface $entityManager): Response
     {

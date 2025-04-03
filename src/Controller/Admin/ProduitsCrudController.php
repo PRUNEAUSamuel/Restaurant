@@ -27,6 +27,7 @@ class ProduitsCrudController extends AbstractCrudController
                     'Entrée' => 'entree',
                     'Plat' => 'plat',
                     'Dessert' => 'dessert',
+                    'Boisson' => 'boisson',
                 ]),
             AssociationField::new('menus')
                 ->setFormTypeOption('multiple', true)
