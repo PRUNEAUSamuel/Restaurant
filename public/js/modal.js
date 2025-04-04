@@ -11,5 +11,3 @@ document.getElementById('closeModal').addEventListener('click', function() {
 
     myModal.classList.add('hidden');
 });
-
-console.log("yo")
