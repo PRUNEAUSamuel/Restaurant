@@ -17,11 +17,11 @@ class ReservationType1 extends AbstractType
             ->add('date', DateType::class, [
                 'label' => 'Date de la réservation :',
                 'label_attr' => [
-                    'class' => 'block mt-3 text-sm font-medium',
+                    'class' => 'block mt-3 text-sm font-medium lg:text-lg',
                 ],
                 'attr' => [
                     'min' => 'today',
-                    'class' => 'mt-4 mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
+                    'class' => 'lg:text-lg mt-4 mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
                 ],
                 'widget' => 'single_text',
                 'constraints' => [

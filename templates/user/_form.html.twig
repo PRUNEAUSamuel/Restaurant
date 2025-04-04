@@ -3,7 +3,7 @@
         {{ form_label(form.email) }}
         {% if form.email.vars.errors|length > 0 %}
             {% for error in form.email.vars.errors %}
-                <span class="text-red-500">{{ error.message }}</span>
+                <span class="text-red-500 lg:text-lg">{{ error.message }}</span>
             {% endfor %}
         {% endif %}
         {{ form_widget(form.email)}}
@@ -11,7 +11,7 @@
         {{ form_label(form.nom) }}
         {% if form.nom.vars.errors|length > 0 %}
             {% for error in form.nom.vars.errors %}
-                <span class="text-red-500">{{ error.message }}</span>
+                <span class="text-red-500 lg:text-lg">{{ error.message }}</span>
             {% endfor %}
         {% endif %}
         {{ form_widget(form.nom)}}
@@ -19,22 +19,22 @@
         {{ form_label(form.password.first) }}
         {% if form.password.first.vars.errors|length > 0 %}
             {% for error in form.password.first.vars.errors %}
-                <span class="text-red-500">{{ error.message }}</span>
+                <span class="text-red-500 lg:text-lg">{{ error.message }}</span>
             {% endfor %}
         {% endif %}
         {{ form_widget(form.password.first)}}
 
         {{ form_row(form.password.second) }}
 
-        <p class="block mb-2 text-sm font-medium">Date de création :</p>
-        <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3">{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</p>
+        <p class="block mb-2 text-sm font-medium lg:text-lg">Date de création :</p>
+        <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3 lg:text-lg">{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</p>
 
-        <p class="block mb-2 text-sm font-medium">Dernière connexion :</p>
-        <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3">{{ user.lastConnexion ? user.lastConnexion|date('Y-m-d H:i:s') : '' }}</p>
+        <p class="block mb-2 text-sm font-medium lg:text-lg">Dernière connexion :</p>
+        <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3 lg:text-lg">{{ user.lastConnexion ? user.lastConnexion|date('Y-m-d H:i:s') : '' }}</p>
 
-        <p class="block mb-2 text-sm font-medium">Compte vérifié :</p>
-        <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3">{{ user.isVerified ? 'Yes' : 'No' }}</p>
+        <p class="block mb-2 text-sm font-medium lg:text-lg">Compte vérifié :</p>
+        <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3 lg:text-lg">{{ user.isVerified ? 'Yes' : 'No' }}</p>
         
-        <button class="mt-3 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-5">{{ button_label|default('Enregistrer les modifications') }}</button>
+        <button class="mt-3 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-5 lg:text-lg">{{ button_label|default('Enregistrer les modifications') }}</button>
     {{ form_end(form) }}
 </div>

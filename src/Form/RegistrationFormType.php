@@ -21,10 +21,10 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Adresse email :',
                 'label_attr' => [
-                    'class' => 'block mb-2 text-sm font-medium',
+                    'class' => 'block mb-2 text-sm font-medium lg:text-lg',
                 ],
                 'attr' => [
-                    'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
+                    'class' => 'lg:text-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
                     'placeholder' => 'exemple@gmail.com',
                 ],
                 'constraints' => [
@@ -36,10 +36,10 @@ class RegistrationFormType extends AbstractType
             ->add('nom', TextType::class, [
                 'label' => 'Nom de réservation :',
                 'label_attr' => [
-                    'class' => 'block mb-2 text-sm font-medium',
+                    'class' => 'lg:text-lg block mb-2 text-sm font-medium',
                 ],
                 'attr' => [
-                    'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
+                    'class' => 'lg:text-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
                     'placeholder' => 'exemple',
                 ],
                 'constraints' => [
@@ -54,10 +54,10 @@ class RegistrationFormType extends AbstractType
                 'first_options' => [
                     'label' => 'Mot de passe :',
                     'label_attr' => [
-                        'class' => 'block mb-2 text-sm font-medium',
+                        'class' => 'lg:text-lg block mb-2 text-sm font-medium',
                     ],
                     'attr' => [
-                        'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3',
+                        'class' => 'lg:text-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-3',
                         'placeholder' => '••••••••',
                     ],
                     'constraints' => [
@@ -74,10 +74,10 @@ class RegistrationFormType extends AbstractType
                 'second_options' => [
                     'label' => 'Confirmez le mot de passe :',
                     'label_attr' => [
-                        'class' => 'block mb-2 text-sm font-medium',
+                        'class' => 'lg:text-lg block mb-2 text-sm font-medium',
                     ],
                     'attr' => [
-                        'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
+                        'class' => 'lg:text-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white',
                         'placeholder' => '••••••••',
                     ],
                 ],

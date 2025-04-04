@@ -12,10 +12,10 @@
     S'inscrire
 </button>
 <div id="authentication-modal" tabindex="-1" class="bg-black/70 hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 content-center w-full md:inset-0 h-full">
-    <div class="relative p-4 w-full max-w-md max-h-full justify-self-center">
+    <div class="relative p-4 w-full max-w-lg max-h-full justify-self-center">
         <div class="relative bg-[#DADADA] rounded-lg shadow-sm">
             <div class="flex items-center justify-between p-2 pl-4 md:p-5 rounded-t">
-                <h3 class="font-bold">
+                <h3 class="font-bold lg:text-2xl">
                     Réservez votre table 3/3
                 </h3>
                 <button type="button" class="end-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
@@ -30,8 +30,8 @@
 
                     {{ form_row(form.table) }}
 
-                    <button type="submit" class="mt-1 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Réserver</button>
-                    <a href="{{ path('app_reservation_clear') }}" class="text-blue-700 hover:underline dark:text-blue-800">Annuler</a>
+                    <button type="submit" class="lg:text-lg mt-1 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Réserver</button>
+                    <a href="{{ path('app_reservation_clear') }}" class="text-blue-700 hover:underline dark:text-blue-800 lg:text-lg">Annuler</a>
 
                 {{ form_end(form) }}
             </div>
@@ -40,29 +40,29 @@
 </div>
 
 <section class="flex justify-center flex-col text-white bg-cover bg-center h-80 bg-[url(/build/images/page_accueil/fond.webp)]">
-    <div class="rounded-lg mb-8 bg-black/75 w-2/3 self-center p-4 text-sm">
-        <h1 class="font-bold text-base">La taverne du Chabrulé</h1>
+    <div class="rounded-lg mb-8 bg-black/75 w-2/3 self-center p-4 text-sm lg:text-lg">
+        <h1 class="lg:text-xl font-bold text-base">La taverne du Chabrulé</h1>
         <p>1 rue du temple</p>
         <p>44730</p>
         <p>Saint-Michel-Chef-Chef</p>
         <p>07 62 56 89 45</p>
     </div>
     <div class="mt-2">
-        <a href="{{ path('app_reservation_new') }}" class="hover:bg-white w-2/5 self-center rounded-lg bg-white/75 p-3 px-7 text-black font-bold">
+        <a href="{{ path('app_reservation_new') }}" class="lg:text-xl hover:bg-white w-2/5 self-center rounded-lg bg-white/75 p-3 px-7 text-black font-bold">
             Réserver
         </a>
     </div>
 </section>
 <section class="p-5">
-    <h1 class="py-4 font-bold">Notre grande histoire</h1>
-    <p class="text-start p-4 border-t text-sm">
-        <div class="text-start">
+    <h1 class="py-4 font-bold lg:text-xl">Notre grande histoire</h1>
+    <p class="p-4 border-t">
+        <div class="text-start lg:text-lg">
             La taverne du Chabrulé est un restaurant charmant situé à Saint-Michel-Chef-Chef, offrant une expérience culinaire à la fois 
             raffinée et chaleureuse. Depuis son ouverture en 2010, notre établissement s'est fait un nom grâce à une cuisine qui 
             allie à la perfection tradition et innovation. Le chef, passionné par les produits locaux et de saison, propose une carte 
             qui évolue au gré des produits du marché, mettant en avant les saveurs authentiques de la cuisine française.
         </div>
-        <div class="text-start mt-3">
+        <div class="text-start mt-3 lg:text-lg">
             Le décor du restaurant mêle des touches modernes à des éléments classiques, créant ainsi une atmosphère accueillante et 
             élégante. La salle principale est spacieuse et lumineuse, tandis que notre terrasse vous invite à savourer vos repas en plein 
             air lors des journées ensoleillées.

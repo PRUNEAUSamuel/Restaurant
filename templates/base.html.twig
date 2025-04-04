@@ -18,64 +18,64 @@
     <body class="text-center min-h-screen">
         <div class="max-w-[1200px] m-auto">
             <nav>
-                <div class="max-w-screen-xl flex flex-wrap items-center justify-center mx-auto p-4">
+                <div class="max-w-screen-xl flex flex-wrap items-center justify-center md:justify-between mx-auto p-4">
                     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                         {% if app.user is null %}
-                            <a href="{{ path('app_login') }}" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center">Connexion</a>
+                            <a href="{{ path('app_login') }}" class="lg:text-lg text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-md px-4 py-2 text-center">Connexion</a>
                         {% endif %}
-                        <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500" aria-controls="navbar-sticky" aria-expanded="false">
+                        <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-md text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500" aria-controls="navbar-sticky" aria-expanded="false">
                             <span class="sr-only">Open main menu</span>
                             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
                             </svg>
                         </button>
                         {% if app.user %}
-                            <a href="{{ path('app_logout') }}" class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2 text-center">Déconnexion</a>
+                            <a href="{{ path('app_logout') }}" class="lg:text-lg text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-md px-4 py-2 text-center">Déconnexion</a>
                         {% else %}
-                            <a href="{{ path('app_register') }}" class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2 text-center">Inscription</a>
+                            <a href="{{ path('app_register') }}" class="lg:text-lg text-white ml-2 bg-red-700 hover:bg-red-800 font-medium rounded-lg text-md px-4 py-2 text-center">Inscription</a>
                         {% endif %}
                     </div>
-                    <div class="mt-3 border-t items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+                    <div class="mt-3 border-t md:border-0 md:mt-0 items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                         <ul class="flex flex-col px-4 mt-2 md:p-0 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
                             <li>
-                                <a href="{{ path('app_main') }}" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Accueil</a>
+                                <a href="{{ path('app_main') }}" class="lg:text-lg block py-2 px-3 text-gray-900 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Accueil</a>
                             </li>
                             <li>
-                                <a href="{{ path('app_menu') }}" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Menus</a>
+                                <a href="{{ path('app_menu') }}" class="lg:text-lg block py-2 px-3 text-gray-900 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Menus</a>
                             </li>
                             <li>
-                                <a href="{{ path('app_photo') }}" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Photos</a>
+                                <a href="{{ path('app_photo') }}" class="lg:text-lg block py-2 px-3 text-gray-900 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Photos</a>
                             </li>
                             <li>
-                                <a href="{{ path('app_reservation_new') }}" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Réservation</a>
+                                <a href="{{ path('app_reservation_new') }}" class="lg:text-lg block py-2 px-3 text-gray-900 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Réservation</a>
                             </li>
                             <li>
-                                <a href="{{ path('app_comments_index') }}" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Commentaires</a>
+                                <a href="{{ path('app_comments_index') }}" class="lg:text-lg block py-2 px-3 text-gray-900 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Avis</a>
                             </li>
                             {% if app.user %}
                                 <li>
-                                    <a href="{{ path('app_user_edit', {'id': app.user.id}) }}" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Profil</a>
+                                    <a href="{{ path('app_user_edit', {'id': app.user.id}) }}" class="lg:text-lg block py-2 px-3 text-gray-900 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Profil</a>
                                 </li>
                             {% endif %}
                             {% if app.user and 'ROLE_ADMIN' in app.user.roles %}
-                                <a href="{{ path('admin') }}" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Admin</a>
+                                <a href="{{ path('admin') }}" class="lg:text-lg block py-2 px-3 text-gray-900 rounded-md hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Admin</a>
                             {% endif %}
                         </ul>
                     </div>
                 </div>
             </nav> 
             {% block body %}{% endblock %}
-            <footer class="flex flex-row justify-around text-sm py-2 w-full">
+            <footer class="flex flex-row justify-around text-md py-2 w-full">
                 <div class="flex">
-                    <a target="_blank" href="https://www.instagram.com" class="flex self-center">
+                    <a target="_blank" href="https://www.instagram.com" class="lg:text-lg flex self-center">
                         <svg class="self-center" width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
                     </a>
                 </div>
                 <div>
-                    <p>Mentions légales</p>
+                    <p class="lg:text-lg ">Mentions légales</p>
                 </div>
                 <div>
-                    <p>CGV</p>
+                    <p class="lg:text-lg ">CGV</p>
                 </div>
             </footer>
         </div>
