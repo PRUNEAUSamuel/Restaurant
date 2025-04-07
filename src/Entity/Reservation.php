@@ -26,6 +26,9 @@ class Reservation
     #[ORM\Column(type: Types::TIME_IMMUTABLE)]
     private ?\DateTimeImmutable $arrivalTime = null;
 
+    #[ORM\Column]
+    private ?int $phoneNumber = null;
+
     #[ORM\ManyToOne(targetEntity: Tables::class, inversedBy: 'reservations')]
     private ?Tables $table = null;
 
@@ -78,6 +81,18 @@ class Reservation
     public function setTable(?Tables $table): self
     {
         $this->table = $table;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?int
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(int $phoneNumber): static
+    {
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }

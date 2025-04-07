@@ -18,6 +18,9 @@ class Tables
     #[ORM\Column]
     private ?int $nbPlaces = null;
 
+    #[ORM\Column(type: "boolean")]
+    public ?bool $blocked = false;
+
     #[ORM\Column]
     private ?int $tableNumber = null;
 

@@ -30,6 +30,10 @@
 
                     {{ form_row(form.table) }}
 
+                    {{ form_row(form.phoneNumber) }}
+
+                    <p class="text-sm">En cas d'annulation exceptionnelle de votre réservation, ce numéro sera prévenu. Inutile de vous présenter au restaurant nous ne pourrons pas vous accueillir.</p>
+
                     <button type="submit" class="lg:text-lg mt-1 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Réserver</button>
                     <a href="{{ path('app_reservation_clear') }}" class="text-blue-700 hover:underline dark:text-blue-800 lg:text-lg">Annuler</a>
 

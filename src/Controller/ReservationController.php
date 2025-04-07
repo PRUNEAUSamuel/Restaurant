@@ -155,7 +155,7 @@ final class ReservationController extends AbstractController
             }
 
             // récupérer toutes les tables disponibles
-            $tables = $entityManager->getRepository(Tables::class)->findAll();
+            $tables = $entityManager->getRepository(Tables::class)->findBy(['blocked' => false]);
 
             // on récupère les tables qui sont déjà prises sur ce créneau
             $takenTableIds = array_map(fn($reservation) => $reservation->getTable()->getId(), $reservations);
@@ -193,7 +193,9 @@ final class ReservationController extends AbstractController
                 $reservation->setDate($session->get('reservation_date'));
                 $reservation->setArrivalTime($session->get('reservation_time'));
                 $selectedTables = $form->get('table')->getData();
+                $phoneNumber = $form->get('phoneNumber')->getData();
                 $reservation->setTable($selectedTables);
+                $reservation->setPhoneNumber($phoneNumber);
                 $entityManager->persist($reservation);
                 $entityManager->flush();
 

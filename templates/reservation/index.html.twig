@@ -29,6 +29,10 @@
                             <p>Nom de réservation :</p>
                             <p>{{ reservation.user ? reservation.user.getNom() : '' }}</p>
                         </div>
+                        <div class="flex justify-between p-1 m-2 rounded bg-white">
+                            <p>Numéro de téléphone :</p>
+                            <p>{{ reservation.phoneNumber ? reservation.phoneNumber : '' }}</p>
+                        </div>
                         <div class="d-flex justify-content-end align-items-center">
                             <form method="post" action="{{ path('app_reservation_delete', {'id': reservation.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir annuler votre réservation ?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reservation.id) }}">
