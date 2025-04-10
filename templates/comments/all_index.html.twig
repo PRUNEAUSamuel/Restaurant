@@ -9,7 +9,7 @@
     <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 lg:text-lg" href="{{ path('app_comments_new') }}">Ecrire un avis</a>
     <div>
         {% if comments is empty %}
-            <p class="my-5 text-2xl">Aucun commentaires publiés.</p>
+            <p class="my-5 text-2xl">Aucun avis publiés.</p>
         {% else %}
             <div>
                 {% for comment in comments %}
